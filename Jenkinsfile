@@ -46,6 +46,14 @@ pipeline {
   post {
     always {
       junit testResults: 'test-results/junit.xml', allowEmptyResults: true
+      publishHTML(target: [
+        allowMissing: true,
+        alwaysLinkToLastBuild: true,
+        keepAll: true,
+        reportDir: 'playwright-report',
+        reportFiles: 'index.html',
+        reportName: 'Playwright HTML Report'
+      ])
       archiveArtifacts artifacts: 'playwright-report/**', allowEmptyArchive: true
     }
   }
