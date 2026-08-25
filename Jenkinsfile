@@ -27,11 +27,10 @@ pipeline {
 
     stage('Run Playwright Tests') {
       steps {
-        withCredentials([usernamePassword(
-          credentialsId: 'saucedemo-credentials',
-          usernameVariable: 'SAUCE_USERNAME',
-          passwordVariable: 'SAUCE_PASSWORD'
-        )]) {
+        withCredentials([
+          string(credentialsId: 'qa-username', variable: 'SAUCE_USERNAME'),
+          string(credentialsId: 'qa-password', variable: 'SAUCE_PASSWORD')
+        ]) {
           withEnv(["TEST_ENV=${params.TARGET_ENV}", "PRODUCT_COUNT=${params.PRODUCT_COUNT}"]) {
             bat 'npx playwright test'
           }
