@@ -1,5 +1,7 @@
 const DEFAULT_PRODUCT_COUNT = 2;
 const MAX_PRODUCT_COUNT = 6;
+const DEFAULT_USERNAME = 'standard_user';
+const DEFAULT_PASSWORD = 'secret_sauce';
 
 function getProductCount() {
   const configuredCount = process.env.PRODUCT_COUNT;
@@ -17,4 +19,11 @@ function getProductCount() {
   return productCount;
 }
 
-module.exports = { getProductCount };
+function getCredentials() {
+  return {
+    username: process.env.SAUCE_USERNAME || DEFAULT_USERNAME,
+    password: process.env.SAUCE_PASSWORD || DEFAULT_PASSWORD,
+  };
+}
+
+module.exports = { getCredentials, getProductCount };
