@@ -1,4 +1,7 @@
 const { defineConfig, devices } = require('@playwright/test');
+const { loadEnvironment } = require('./config/environment');
+
+const environment = loadEnvironment();
 
 /**
  * Read environment variables from file.
@@ -17,9 +20,13 @@ module.exports = defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: [
+    ['list'],
+    ['junit', { outputFile: 'test-results/junit.xml' }],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
+  ],
   use: {
-    baseURL: 'https://www.saucedemo.com',
+    baseURL: environment.baseURL,
     trace: 'on-first-retry',
   },
   projects: [

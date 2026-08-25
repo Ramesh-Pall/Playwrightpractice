@@ -1,7 +1,5 @@
 const DEFAULT_PRODUCT_COUNT = 2;
 const MAX_PRODUCT_COUNT = 6;
-const DEFAULT_USERNAME = 'standard_user';
-const DEFAULT_PASSWORD = 'secret_sauce';
 
 function getProductCount() {
   const configuredCount = process.env.PRODUCT_COUNT;
@@ -20,9 +18,13 @@ function getProductCount() {
 }
 
 function getCredentials() {
+  if (!process.env.SAUCE_USERNAME || !process.env.SAUCE_PASSWORD) {
+    throw new Error('SAUCE_USERNAME and SAUCE_PASSWORD must be provided.');
+  }
+
   return {
-    username: process.env.SAUCE_USERNAME || DEFAULT_USERNAME,
-    password: process.env.SAUCE_PASSWORD || DEFAULT_PASSWORD,
+    username: process.env.SAUCE_USERNAME,
+    password: process.env.SAUCE_PASSWORD,
   };
 }
 
