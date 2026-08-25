@@ -27,6 +27,7 @@ module.exports = defineConfig({
   ],
   use: {
     baseURL: environment.baseURL,
+    headless: process.env.HEADLESS !== 'false',
     trace: 'on-first-retry',
   },
   projects: [

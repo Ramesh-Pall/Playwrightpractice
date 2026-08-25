@@ -31,7 +31,11 @@ pipeline {
           string(credentialsId: 'qa-username', variable: 'SAUCE_USERNAME'),
           string(credentialsId: 'qa-password', variable: 'SAUCE_PASSWORD')
         ]) {
-          withEnv(["TEST_ENV=${params.TARGET_ENV}", "PRODUCT_COUNT=${params.PRODUCT_COUNT}"]) {
+          withEnv([
+            "TEST_ENV=${params.TARGET_ENV}",
+            "PRODUCT_COUNT=${params.PRODUCT_COUNT}",
+            'HEADLESS=false'
+          ]) {
             bat 'npx playwright test'
           }
         }
