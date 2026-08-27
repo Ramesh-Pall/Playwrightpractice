@@ -22,4 +22,4 @@ test(`adds the first ${productCount} products to the cart`, async ({ page }) => 
   await expect(page).toHaveURL(/\/cart\.html/);
   await expect(cartPage.cartItems).toHaveCount(productCount);
   await expect.poll(() => cartPage.getProductNames()).toEqual(expectedProductNames);
-});
+}); // added comments for reference
