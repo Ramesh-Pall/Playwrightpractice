@@ -27,8 +27,9 @@ module.exports = defineConfig({
   ],
   use: {
     baseURL: environment.baseURL,
-    headless: process.env.HEADLESS !== 'false',
+    headless: process.env.HEADLESS == 'false',
     trace: 'on-first-retry',
+    permissions: ['geolocation'],
   },
   projects: [
     {
